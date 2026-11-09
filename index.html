@@ -1,5 +1,20 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>ID House</title>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+<title>ID House Inc.</title>
+<meta name="description" content="We build magnetic personal brands for founders and experts. Turn your name into your most valuable asset.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ID House Inc.">
+<meta property="og:title" content="ID House Inc.">
+<meta property="og:description" content="Turn your name into your most valuable asset. Magnetic personal brands for founders and experts.">
+<meta property="og:url" content="https://idhouseinc.com/">
+<meta property="og:image" content="https://idhouseinc.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://idhouseinc.com/og.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -304,6 +319,7 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
 @media (max-width:560px){.getboth form{flex-direction:column}.getboth .btn{width:100%}}
 </style>
 
+</head><body>
 <header class="nav">
   <div class="wrap">
     <a class="mark" href="#top">ID HOUSE INC.</a>
@@ -818,7 +834,8 @@ function sendForm(subject,data){
   });
   const m=document.getElementById('mcta');
   if('IntersectionObserver' in window){
-    new IntersectionObserver(es=>es.forEach(x=>m.classList.toggle('hide',x.isIntersecting)),{threshold:.05}).observe(document.getElementById('apply'));
+    const vis=new Set();const io=new IntersectionObserver(es=>{es.forEach(x=>x.isIntersecting?vis.add(x.target):vis.delete(x.target));m.classList.toggle('hide',vis.size>0)},{threshold:.05});
+    ['apply','guides'].forEach(id=>io.observe(document.getElementById(id)));io.observe(document.querySelector('footer'));
   }
   show(0);
 
