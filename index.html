@@ -315,6 +315,9 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
 .getboth input:focus{border-color:var(--ink)}
 .getboth .sub{font-size:14px;color:var(--ash)}
 .getboth .ok{font-weight:600}
+.gdl{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%}
+.gdl[hidden]{display:none}
+@media (max-width:560px){.gdl .btn{width:100%;justify-content:center}}
 @media (max-width:760px){.guides .pair{grid-template-columns:1fr}}
 @media (max-width:560px){.getboth form{flex-direction:column}.getboth .btn{width:100%}}
 </style>
@@ -727,24 +730,28 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px;
       </div>
       <div class="pair">
         <article class="gcard">
-          <span class="tagl">Guide 01 · Showing up</span>
-          <h3>The Show Up Guide</h3>
-          <p>How to set up your Instagram so it speaks for you before you do.</p>
-          <ul><li>Bio and profile</li><li>Captions and calls to action</li><li>Highlights and links</li></ul>
+          <span class="tagl">Private Preview 01 · Branding</span>
+          <h3>The Frame Before the Feed.</h3>
+          <p>A sneak peek of Irma Lion's upcoming book, <em>The Art of Being in the Frame</em>. Build a brand that looks like the person your clients meet in the room.</p>
+          <ul><li>Your point of view</li><li>A voice that sounds like you</li><li>Content that works as evidence</li></ul>
         </article>
         <article class="gcard">
-          <span class="tagl">Guide 02 · Monetization</span>
-          <h3>Converting 25K followers into $25,000</h3>
-          <p>How to turn attention into income by offering your audience higher levels of service.</p>
-          <ul><li>Your first offer</li><li>Pricing and positioning</li><li>A path from follower to client</li></ul>
+          <span class="tagl">Private Preview 02 · Monetization</span>
+          <h3>From Being Seen to Being Paid.</h3>
+          <p>A second preview from the book. How to turn the brand and audience you already have into income.</p>
+          <ul><li>An offer they're already asking for</li><li>Pricing the result, not the hours</li><li>A path from follower to client</li></ul>
         </article>
       </div>
       <div class="getboth">
         <form id="gform" novalidate>
           <input type="email" id="gemail" placeholder="Your email" aria-label="Email" autocomplete="email">
-          <button class="btn" type="submit">Send me both guides <span class="arr">→</span></button>
+          <button class="btn" type="submit">Get both guides <span class="arr">→</span></button>
         </form>
-        <span class="sub" id="gmsg">Both guides, free, straight to your inbox.</span>
+        <span class="sub" id="gmsg">Both guides, free. Instant download.</span>
+        <div class="gdl" id="gdl" hidden>
+          <a class="btn" href="guides/the-frame-before-the-feed.pdf" download="ID House - The Frame Before the Feed.pdf" target="_blank" rel="noopener">Download Preview 01 <span class="arr">↓</span></a>
+          <a class="btn" href="guides/from-being-seen-to-being-paid.pdf" download="ID House - From Being Seen to Being Paid.pdf" target="_blank" rel="noopener">Download Preview 02 <span class="arr">↓</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -845,8 +852,9 @@ function sendForm(subject,data){
     const v=document.getElementById('gemail').value.trim();const msg=document.getElementById('gmsg');
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){msg.textContent='Please enter a valid email.';return}
     const b=g.querySelector('button');b.disabled=true;
-    sendForm('Guide request: '+v,{email:v,replyto:v,request:'Send both free guides'}).then(()=>{
-      g.hidden=true;msg.classList.add('ok');msg.textContent='Both guides are on their way to '+v+'.';
+    sendForm('Guide request: '+v,{email:v,replyto:v,request:'Downloaded both free guides'}).then(()=>{
+      g.hidden=true;msg.classList.add('ok');msg.textContent='Your guides are ready. Enjoy the preview.';
+      document.getElementById('gdl').hidden=false;
     }).catch(()=>{b.disabled=false;msg.textContent='Something went wrong. Please try again.'});
   });
 })();
